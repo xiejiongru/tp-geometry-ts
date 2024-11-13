@@ -1,18 +1,22 @@
 import Coordinate from "./Coordinate";
 
 export default class Point {
-  private coordinates?: Coordinate;
+  private coordinate?: Coordinate;
 
   constructor(coordinate?: Coordinate) {
-    this.coordinates = coordinate ;
+    this.coordinate = coordinate ;
+  }
+
+  getCoordinate(): Coordinate {
+    return this.coordinate;
   }
 
   x(): number {
-    return this.coordinates ? this.coordinates[0] : Number.NaN ;
+    return this.coordinate ? this.coordinate[0] : Number.NaN ;
   }
 
   y(): number {
-    return this.coordinates ? this.coordinates[1] : Number.NaN ;
+    return this.coordinate ? this.coordinate[1] : Number.NaN ;
   }
 
 }
