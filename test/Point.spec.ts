@@ -12,8 +12,10 @@ describe("test Point", () => {
         // 创建一个没有传入坐标的 Point 实例
         const p = new Point();
         
-        // 断言 getCoordinate() 返回 undefined，因为没有传入坐标
-        expect(p.getCoordinate()).to.equal(undefined);
+                // // 断言 getCoordinate() 返回 undefined，因为没有传入坐标
+                // expect(p.getCoordinate()).to.equal(undefined);
+        // 断言 getCoordinate() 返回空数组，因为默认值是空数组
+        expect(p.getCoordinate()).to.deep.equal([]);
         console.log("Truc :")
 
         // 断言 x() 方法返回的值为 NaN
@@ -26,17 +28,18 @@ describe("test Point", () => {
     // 测试带坐标参数的构造函数
     it("test constructor with coordinates", () => {
         // 创建一个传入坐标 [3.0, 4.0] 的 Point 实例
-        const h = new Point([3.0, 4.0]);
+        const p1 = new Point([3.0, 4.0]);
 
-        expect(h.getType()).to.equal("Point");
+        expect(p1.getType()).to.equal("Point");
+        expect(p1.isEmpty()).to.equal(false);
 
         // 断言 getCoordinate() 返回的坐标与 [3.0, 4.0] 深度相等
-        expect(h.getCoordinate()).to.deep.equal([3.0, 4.0]);
+        expect(p1.getCoordinate()).to.deep.equal([3.0, 4.0]);
 
 
         // 断言 x() 方法返回的值为 3.0
-        expect(h.x()).to.equal(3.0);
+        expect(p1.x()).to.equal(3.0);
         // 断言 y() 方法返回的值为 4.0
-        expect(h.y()).to.equal(4.0);
+        expect(p1.y()).to.equal(4.0);
     });
 });

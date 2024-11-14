@@ -14,6 +14,7 @@ describe("test LineString", () => {
         const p1 = new Point([3.0, 4.0]);
         const p2 = new Point([7.0, 9.0]);
         const l = new LineString([p1, p2]);
+        expect(l.isEmpty()).to.equal(false);
 
         expect(l.getType()).to.equal("LineString");
 

@@ -9,11 +9,15 @@ export default class LineString implements Geometry {
     constructor(points?: Array<Point>) {
       this.points = points ;
     }
-  
+
+    //0.2  
+    isEmpty(): boolean {
+      return this.points.length === 0;
+  }
     getType(): string {
         return "LineString";
     }
-  
+
     //3
     getNumPoints(): number {
         // 如果 points 存在，返回其长度；否则返回 0
