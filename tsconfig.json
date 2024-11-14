@@ -1,9 +1,9 @@
 {
     "compilerOptions": {
-        "outDir": "./dist",
-        "lib": ["es6","dom"],
-        "target": "es5",
-        "allowJs": true
+        "outDir": "./dist",         // 指定输出目录，将编译后的文件放在 ./dist 文件夹下
+        "lib": ["es6", "dom"],      // 指定编译时使用的库，此处包括 ECMAScript 6 和 DOM 库
+        "target": "es5",            // 将 TypeScript 编译到 ECMAScript 5 的兼容性
+        "allowJs": true             // 允许编译器处理 JavaScript 文件
     },
-    "include": ["src/**/*"],
+    "include": ["src/**/*"]         // 包含 src 文件夹下的所有文件用于编译
 }
