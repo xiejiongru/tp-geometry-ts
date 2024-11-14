@@ -30,6 +30,11 @@ export default class LineString implements Geometry {
     return this.points && n >= 0 && n < this.points.length ? this.points[n] : undefined;
     }
   
+    //0.4
+    clone(): LineString {
+    const copy = new LineString([...this.points]); // 深拷贝坐标
+    return copy;
+  }
     translate(dx: number, dy: number) {
       this.points.forEach(Point => Point.translate(dx, dy)) 
     }

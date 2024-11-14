@@ -29,7 +29,6 @@ describe("test Point", () => {
     it("test constructor with coordinates", () => {
         // 创建一个传入坐标 [3.0, 4.0] 的 Point 实例
         const p1 = new Point([3.0, 4.0]);
-        const d1 = new Point([1, 1]);
 
         expect(p1.getType()).to.equal("Point");
         expect(p1.isEmpty()).to.equal(false);
@@ -42,9 +41,12 @@ describe("test Point", () => {
         // 断言 y() 方法返回的值为 4.0
         expect(p1.y()).to.equal(4.0);
 
-        //3
-        expect(p1.translate(d1[0],d1[1])).to.deep.equal([4, 5]);
+        const copy = p1.clone();
 
+        copy.translate(2.0, -3.0);
 
-    });
+        expect(p1.getCoordinate()).to.deep.equal([3.0, 4.0]);
+        expect(copy.getCoordinate()).to.deep.equal([5.0, 1.0]); // 已被平移
+
+        });
 });
