@@ -13,7 +13,7 @@ export default class LineString implements Geometry {
     //0.2  
     isEmpty(): boolean {
       return this.points.length === 0;
-  }
+    }
     getType(): string {
         return "LineString";
     }
@@ -22,7 +22,7 @@ export default class LineString implements Geometry {
     getNumPoints(): number {
         // 如果 points 存在，返回其长度；否则返回 0
         return this.points ? this.points.length : 0;
-        }
+    }
     
     //4 获取指定索引的点
     getPointN(n: number): Point {
@@ -34,7 +34,7 @@ export default class LineString implements Geometry {
     clone(): LineString {
     const copy = new LineString([...this.points]); // 深拷贝坐标
     return copy;
-  }
+    }
     translate(dx: number, dy: number) {
       this.points.forEach(Point => Point.translate(dx, dy)) 
     }
