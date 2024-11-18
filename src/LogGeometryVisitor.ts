@@ -17,4 +17,3 @@ export default class LogGeometryVisitor implements GeometryVisitor {
         }else{}
         console.log("LineString: " + LineString.getPoints());}
     }
-}
