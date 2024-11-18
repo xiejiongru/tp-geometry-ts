@@ -7,7 +7,7 @@ import EnvelopeBuilder from "../src/EnvelopeBuilder";
 describe("test Enveloppe", () => {
     //1.1. test default constructor
     it("test default constructor", () => {
-        const envA = new Envelope();    //新建变量不会影响到后续的测试用例,减少副作用
+        const envA = new Envelope();    //新建变量不会影响到后续的测试用例,减少副作用 同时是facade的一种案例
         expect(envA.isEmpty()).to.equal(true);
 
         // 1.2. test constructor with two coordinates

@@ -42,4 +42,14 @@ describe("test LineString", () => {
         expect(l.getPointN(1)).to.equal(undefined);
     });
 
+    it("test getEnvelope", () => 
+        {
+            const p1 = new Point([3.0, 4.0]);
+            const p2 = new Point([7.0, 9.0]);
+            const l = new LineString([p1, p2]);
+
+            const envelope = l.getEnvelope();
+
+            expect(envelope.toString()).to.equal("[3,4]");
+        });
 });

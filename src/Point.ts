@@ -1,12 +1,15 @@
 import Coordinate from "./Coordinate";
+import Envelope from "./Envelope";
 import Geometry from "./Geometry";
+import EnvelopeBuilder from "./EnvelopeBuilder";
+import GeometryVisitor from "./GeometryVisitor";
 
 export default class Point implements Geometry {
   private coordinate?: Coordinate;
 
   //0.1.2
-  constructor(coordinate?: Coordinate) {
-    this.coordinate = coordinate || []; // || 或
+  constructor(coordinate: Coordinate = [NaN, NaN]) {    
+    this.coordinate = coordinate;
   }
 
   getType(): string {
@@ -24,17 +27,20 @@ export default class Point implements Geometry {
   }
 
   x(): number {
-    return this.coordinate && this.coordinate.length > 0 ? this.coordinate[0] : NaN;
+    return this.coordinate && this.coordinate.length > 0 ? this.coordinate[0] : NaN;       // 这个写法更现代: return this.coordinate[0] ?? NaN;
 }
 
   y(): number {
-      return this.coordinate && this.coordinate.length > 1 ? this.coordinate[1] : NaN;
+    return this.coordinate && this.coordinate.length > 1 ? this.coordinate[1] : NaN;
   }
+//   判断坐标的存在性：
+  // x() 方法只检查 coordinate[0]，因为 x 坐标只需要第一个值。
+  // y() 方法检查 coordinate[1]，因为 y 坐标需要第二个值。
 
   
   //0.4
   clone(): Point {
-    const copy = new Point([...this.coordinate]); // 深拷贝坐标
+    const copy = new Point([...this.coordinate]);
     return copy;
   }
   //0.3
@@ -45,4 +51,13 @@ export default class Point implements Geometry {
     }
   }
   
+  getEnvelope(): Envelope {
+      const builder = new EnvelopeBuilder();
+      builder.insert(this.coordinate);
+      return builder.build();
+  }
+  
+  accept(visitor: GeometryVisitor) {
+        visitor.visitPoint(this);
+  }
 }

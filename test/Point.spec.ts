@@ -4,6 +4,7 @@ import "mocha";
 import { expect } from "chai";
 import Point from "../src/Point";
 import LineString from "../src/LineString";
+import Envelope from "../src/Envelope";
 
 describe("test Point", () => {
 
@@ -47,6 +48,15 @@ describe("test Point", () => {
 
         expect(p1.getCoordinate()).to.deep.equal([3.0, 4.0]);
         expect(copy.getCoordinate()).to.deep.equal([5.0, 1.0]); // 已被平移
+
+        
+        it("test getEnvelope", () => {
+            //6.2 具体点 (0面积情况)
+            const p = new Point([1,2]);
+            const envelope = p.getEnvelope();
+            
+            expect(envelope.toString()).to.equal("[1,2],[1,2]");
+        });
 
         });
 });

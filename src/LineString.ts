@@ -2,6 +2,9 @@
 import Coordinate from "./Coordinate";
 import Geometry from "./Geometry";
 import Point from "./Point";
+import Envelope from "./Envelope";
+import EnvelopeBuilder from "./EnvelopeBuilder";
+import GeometryVisitor from "./GeometryVisitor";
 
 export default class LineString implements Geometry {
     private points?: Array<Point>;
@@ -18,6 +21,10 @@ export default class LineString implements Geometry {
         return "LineString";
     }
 
+    getPoints(): Array<Point> {
+      return this.points ?? [];
+    }
+    
     //3
     getNumPoints(): number {
         // 如果 points 存在，返回其长度；否则返回 0
@@ -38,4 +45,15 @@ export default class LineString implements Geometry {
     translate(dx: number, dy: number) {
       this.points.forEach(Point => Point.translate(dx, dy)) 
     }
+    
+    getEnvelope(): Envelope {
+        const builder = new EnvelopeBuilder();
+        this.points.forEach(point => builder.insert(point.getCoordinate()));
+        return builder.build();
+    }
+    
+    accept(visitor: GeometryVisitor) {
+        visitor.visitLineString(this);
+    }
+    
   } 
