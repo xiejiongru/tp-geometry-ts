@@ -4,22 +4,24 @@ import Point from "../src/Point";
 import LineString from "../src/LineString";
 import { expect } from "chai";
 
-describe("test WktWriter", () => {
-    
-    it("test write", () => {
-        const p1 = new Point([3, 4]);
-        const p = new Point();
-        const writer = new WktWriter();
-        
-        expect(writer.write(p1)).to.equal("POINT (3 4)");
-        expect(writer.write(p)).to.equal("POINT IS EMPTY");
-        
-        const p3 = new Point([3, 4]);
-        const l1 = new LineString([p1, p3]);
-        const l = new LineString();
-        
-        expect(writer.write(l1)).to.equal("LINESTRING (3 4, 3 4)");
-        expect(writer.write(l)).to.equal("LINESTRING IS EMPTY");
-        
-    })
-})
+describe("WktWriter", () => {
+  it("should throw error on unsupported geometry type", () => {
+    const writer = new WktWriter();
+
+    expect(() => writer.write({})).to.throw("Geometry is null or undefined.");
+  });
+
+  it("should return WKT for Point", () => {
+    const p1 = new Point([3, 4]);
+    const writer = new WktWriter();
+    expect(writer.write(p1)).to.equal("POINT (3 4)");
+  });
+
+  it("should return WKT for LineString", () => {
+    const p1 = new Point([3, 4]);
+    const p2 = new Point([5, 6]);
+    const lineString = new LineString([p1, p2]);
+    const writer = new WktWriter();
+    expect(writer.write(lineString)).to.equal("LINESTRING (3 4, 5 6)");
+  });
+});

@@ -8,7 +8,7 @@ export default class Point implements Geometry {
   private coordinate?: Coordinate;
 
   //0.1.2
-  constructor(coordinate: Coordinate = [NaN, NaN]) {    
+  constructor(coordinate: Coordinate = []) {    
     this.coordinate = coordinate;
   }
 
@@ -18,7 +18,7 @@ export default class Point implements Geometry {
 
   //0.2  
   isEmpty(): boolean {
-    return this.coordinate.length === 0;
+    return !this.coordinate || this.coordinate.length === 0;
 }
 
   //0.1.3
@@ -58,6 +58,6 @@ export default class Point implements Geometry {
   }
   
   accept(visitor: GeometryVisitor) {
-        visitor.visitPoint(this);
+    return visitor.visitPoint(this);
   }
 }

@@ -10,7 +10,7 @@ export default class LineString implements Geometry {
     private points?: Array<Point>;
   
     constructor(points?: Array<Point>) {
-      this.points = points ;
+      this.points = points || []; ;
     }
 
     //0.2  
@@ -21,10 +21,6 @@ export default class LineString implements Geometry {
         return "LineString";
     }
 
-    getPoints(): Array<Point> {
-      return this.points ?? [];
-    }
-    
     //3
     getNumPoints(): number {
         // 如果 points 存在，返回其长度；否则返回 0
@@ -32,9 +28,9 @@ export default class LineString implements Geometry {
     }
     
     //4 获取指定索引的点
-    getPointN(n: number): Point {
-    // 确保 points 存在并且索引 n 在有效范围内，否则返回 undefined
-    return this.points && n >= 0 && n < this.points.length ? this.points[n] : undefined;
+    getPointN(n: number): Point | undefined {
+      // 确保 points 存在并且索引 n 在有效范围内，否则返回 undefined
+      return this.points && n >= 0 && n < this.points.length ? this.points[n] : undefined;
     }
   
     //0.4
@@ -53,7 +49,7 @@ export default class LineString implements Geometry {
     }
     
     accept(visitor: GeometryVisitor) {
-        visitor.visitLineString(this);
+      return visitor.visitLineString(this);
     }
     
   } 

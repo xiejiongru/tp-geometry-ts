@@ -23,7 +23,7 @@ describe("test Enveloppe", () => {
         expect(envB.getYmax()).to.equal(5);
 
         // 1.4. toString
-        expect(envB.toString()).to.equal("bottomLeft : 0 0 | topRight : 5 5");
+        expect(envB.toString()).to.equal("bottomLeft : 0,0 | topRight : 5,5");
     });
     
     // 2. test EnvelopeBuilder

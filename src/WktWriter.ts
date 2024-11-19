@@ -1,29 +1,38 @@
-import Geometry from "./Geometry";
-import Point  from "./Point";
+import Point from "./Point";
 import LineString from "./LineString";
+import GeometryVisitor from "./GeometryVisitor";
 
-export default class WktWriter {
-    write(geometry:Geometry): string {
-      if (geometry instanceof Point) {
-        if (geometry.isEmpty()) {
-          return "POINT EMPTY";
-        } else {
-          return "POINT (" + geometry.x() + " " + geometry.y() + ")";
-        }
-      }      
-        
-      if (geometry instanceof LineString) {
-        if (geometry.isEmpty()) {
-          return "LINESTRING EMPTY";
-        } else {
-          const coordinates = geometry.getPoints()
-          .map(point => `${point.x()} ${point.y()}`)
-          .join(", ");
-        return `LINESTRING(${coordinates})`;
-      }
-    }else {
-        throw new Error("geometry type not supported");
-      }      
- }
+export default class WktWriter implements GeometryVisitor {
+  write(geometry: any): string {
+    if (!geometry) {
+      throw new Error("Geometry is null or undefined.");
+    }
+
+    if (typeof geometry.accept !== "function") {
+      throw new Error("Geometry is null or undefined.");
+    }
+
+    return geometry.accept(this);  
+  }
+
+  visitPoint(point: Point): string {
+    if (point.isEmpty()) {
+      return "POINT EMPTY";
+    }
+    const coord = point.getCoordinate();
+    return `POINT (${coord[0]} ${coord[1]})`;
+  }
+
+  visitLineString(lineString: LineString): string {
+    if (lineString.isEmpty()) {
+      return "LINESTRING EMPTY";
+    }
+    const coordinates = [];
+    for (let i = 0; i < lineString.getNumPoints(); i++) {
+      const point = lineString.getPointN(i);
+      const coord = point.getCoordinate();
+      coordinates.push(`${coord[0]} ${coord[1]}`);
+    }
+    return `LINESTRING (${coordinates.join(", ")})`;
+  }
 }
-  

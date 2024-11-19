@@ -42,7 +42,7 @@ export default class Envelope {
       }
       
     toString(): string {
-      return `Envelope: ${this.bottomLeft.toString()} ${this.topRight.toString()}`;
+      return `bottomLeft : ${this.bottomLeft[0]},${this.bottomLeft[1]} | topRight : ${this.topRight[0]},${this.topRight[1]}`;
       //${expression} 来插入表达式的值
       //python[f-string]   print(f"My name is {name} and I am {age} years old.")
     }

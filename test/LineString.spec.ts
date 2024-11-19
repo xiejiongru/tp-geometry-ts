@@ -50,6 +50,6 @@ describe("test LineString", () => {
 
             const envelope = l.getEnvelope();
 
-            expect(envelope.toString()).to.equal("[3,4]");
+            expect(envelope.toString()).to.equal("bottomLeft : 3,4 | topRight : 7,9");
         });
 });
